@@ -11,10 +11,11 @@ REQUIREMENTS := requirements.txt
 venv:
 	@echo "Creating virtual environment..."
 	$(PYTHON) -m venv $(VENV_DIR)
+	source $(VENV_DIR)/bin/activate
 	@echo "Virtual environment created at $(VENV_DIR)"
 
 # Target to install dependencies
-install: venv
+install: venv 
 	@echo "Installing dependencies..."
 	$(VENV_DIR)/bin/pip install --upgrade pip
 	$(VENV_DIR)/bin/pip install -r $(REQUIREMENTS)
@@ -34,8 +35,6 @@ clean:
 
 # Start main.py
 start:
-	@echo "Running main.py"
-	rm -rf $(VENV_DIR)
 	$(PYTHON) main.py
 
 # Target to show available commands
@@ -45,3 +44,4 @@ help:
 	@echo "  make install    - Install dependencies from requirements.txt"
 	@echo "  make freeze     - Export installed dependencies to requirements.txt"
 	@echo "  make clean      - Remove the virtual environment"
+	@echo "  make start      - Start main.py"
