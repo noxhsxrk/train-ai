@@ -1,0 +1,16 @@
+include:
+  - project: robowealth/operation/gitlab-ci-shared-library
+    ref: master
+    file:
+      - centralize/centralize.gitlab-ci.yml
+
+default:
+  tags:
+    - fundii
+
+variables:
+  NONPROD_GCR_PROJECT_ID: fundii-nonprod/fundii-nonprod-registry
+  UAT_GCR_PROJECT_ID: fundii-nonprod/fundii-uat-registry
+  PROD_GCR_PROJECT_ID: fundii-production/fundii-prod-registry
+  PROJECT_GCR_REGION: asia-southeast1-docker.pkg.dev
+  DOCKER_TLS_CERTDIR: ""
