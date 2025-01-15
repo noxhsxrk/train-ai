@@ -1,12 +1,13 @@
 from transformers import TrainingArguments, Trainer
+import src.config as config
 
-def train_model(model, train_data, validation_data, tokenizer, output_dir="./results"):
+def train_model(model, train_data, validation_data, tokenizer, output_dir=config.OUTPUT_DIR):
     """
     Train model.
     """
     training_args = TrainingArguments(
         output_dir=output_dir,
-        evaluation_strategy="epoch",
+        eval_strategy="epoch",
         learning_rate=5e-5,
         per_device_train_batch_size=8,
         num_train_epochs=3,
@@ -22,6 +23,6 @@ def train_model(model, train_data, validation_data, tokenizer, output_dir="./res
         eval_dataset=validation_data,
         tokenizer=tokenizer,
     )
-
+    
     trainer.train()
     return trainer
