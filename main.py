@@ -13,7 +13,7 @@ def main():
     train_data = preprocess_data(train_data, config.TOKENIZER_NAME)
     validation_data = preprocess_data(validation_data, config.TOKENIZER_NAME)
 
-    model = load_model(config.MODEL_NAME, config.NUM_LABELS, False)
+    model = load_model(config.MODEL_NAME, config.NUM_LABELS, True)
 
     train_model(model, train_data, validation_data, config.TOKENIZER_NAME, config.OUTPUT_DIR)
 
