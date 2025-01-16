@@ -1,6 +1,6 @@
 import os
 
-MODEL_NAME = os.getenv("MODEL_NAME", "google-bert/bert-base-uncased")
+MODEL_NAME = os.getenv("MODEL_NAME", "meta-llama/Llama-3.2-1B")
 TOKENIZER_NAME = os.getenv("TOKENIZER_NAME", MODEL_NAME)
 DATASET_NAME = os.getenv("DATASET_NAME", "arad1367/Crypto_Fundamental_News")
 NUM_LABELS = int(os.getenv("NUM_LABELS", 3))

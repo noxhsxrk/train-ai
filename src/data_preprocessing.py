@@ -13,13 +13,14 @@ def preprocess_data(dataset, tokenizer):
     """
     Tokenization and preprocess dataset.
     """
+    if tokenizer.pad_token is None:
+        tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+
     def preprocess_function(examples):
-        # Map labels from string to integers
         labels = [
             0 if label == "neutral" else 1 if label == "positive" else 2
             for label in examples["label"]
         ]
-        # Tokenize inputs
         tokenized = tokenizer(
             examples["text"],
             padding="max_length",
@@ -29,12 +30,7 @@ def preprocess_data(dataset, tokenizer):
         tokenized["labels"] = labels
         return tokenized
 
-    # Apply tokenization and preprocessing
     dataset = dataset.map(preprocess_function, batched=True)
-
-    # Remove unnecessary columns
     dataset = dataset.remove_columns(["text", "label"])
-
-    # Set dataset format for PyTorch
     dataset.set_format("torch")
     return dataset

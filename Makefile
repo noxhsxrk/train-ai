@@ -11,11 +11,12 @@ REQUIREMENTS := requirements.txt
 venv:
 	@echo "Creating virtual environment..."
 	$(PYTHON) -m venv $(VENV_DIR)
-	source $(VENV_DIR)/bin/activate
 	@echo "Virtual environment created at $(VENV_DIR)"
+	@echo "To activate it, run 'source $(VENV_DIR)/bin/activate'"
 
 # Target to install dependencies
 install: venv 
+	source $(VENV_DIR)/bin/activate && echo "Virtual environment activated"
 	@echo "Installing dependencies..."
 	$(VENV_DIR)/bin/pip install --upgrade pip
 	$(VENV_DIR)/bin/pip install -r $(REQUIREMENTS)

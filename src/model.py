@@ -1,7 +1,7 @@
-from transformers import AutoModelForSequenceClassification, BitsAndBytesConfig
+from transformers import AutoModelForSequenceClassification
 import torch
 
-def load_model(model_name, num_labels, quantization=False):
+def load_model(model_name, num_labels):
     """
     Load model for sequence classification with optional quantization.
     Automatically fallback to CPU or MPS if GPU is unavailable.
