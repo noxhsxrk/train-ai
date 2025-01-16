@@ -9,19 +9,24 @@ def load_data():
     dataset = load_dataset(config.DATASET_NAME)
     return dataset
 
-def preprocess_data(dataset, tokenizer_name):
+def preprocess_data(dataset, tokenizer):
     """
     Tokenization and preprocess dataset.
     """
-    tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
-
     def preprocess_function(examples):
-        # Tokenize the text and map labels to numerical values
-        tokenized = tokenizer(examples["text"], padding="max_length", truncation=True)
-        tokenized["labels"] = [
+        # Map labels from string to integers
+        labels = [
             0 if label == "neutral" else 1 if label == "positive" else 2
             for label in examples["label"]
         ]
+        # Tokenize inputs
+        tokenized = tokenizer(
+            examples["text"],
+            padding="max_length",
+            truncation=True,
+            max_length=128,
+        )
+        tokenized["labels"] = labels
         return tokenized
 
     # Apply tokenization and preprocessing
